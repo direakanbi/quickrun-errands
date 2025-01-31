@@ -7,8 +7,8 @@ import { MessengerReviews } from "@/components/MessengerReviews";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { NotFound } from "./NotFound";
+import { Navbar } from "@/components/Navbar";
 
-// Mock data for initial development
 const mockMessengerData = {
   "1": {
     name: "John Doe",
@@ -71,7 +71,9 @@ const MessengerProfile = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
       <Card className="max-w-3xl mx-auto">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row gap-6">
@@ -149,7 +151,8 @@ const MessengerProfile = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </>
   );
 };
 
