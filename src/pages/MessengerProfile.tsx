@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, MessageCircle } from "lucide-react";
 import { ErrandBookingForm } from "@/components/ErrandBookingForm";
 import { MessengerReviews } from "@/components/MessengerReviews";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { NotFound } from "./NotFound";
 
 // Mock data for initial development
 const mockMessengerData = {
@@ -66,7 +67,7 @@ const MessengerProfile = () => {
   const messenger = mockMessengerData[id as keyof typeof mockMessengerData];
 
   if (!messenger) {
-    return <div className="container mx-auto px-4 py-8">Messenger not found</div>;
+    return <NotFound />;
   }
 
   return (
@@ -112,7 +113,7 @@ const MessengerProfile = () => {
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <p className="text-2xl font-bold">{messenger.completedOrders}</p>
-                  <p className="text-sm text-gray-500">Orders Completed</p>
+                  <p className="text-sm text-gray-500">Orders</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <p className="text-2xl font-bold">{messenger.rating}</p>
@@ -120,19 +121,26 @@ const MessengerProfile = () => {
                 </div>
               </div>
 
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="w-full" size="lg">
-                    Book This Messenger
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[500px]">
-                  <ErrandBookingForm 
-                    messengerId={id as string} 
-                    messengerName={messenger.name}
-                  />
-                </DialogContent>
-              </Dialog>
+              <div className="flex gap-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="flex-1" size="lg">
+                      Book Now
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[500px]">
+                    <ErrandBookingForm 
+                      messengerId={id as string} 
+                      messengerName={messenger.name}
+                    />
+                  </DialogContent>
+                </Dialog>
+                
+                <Button variant="outline" size="lg" className="flex-1">
+                  <MessageCircle className="mr-2" />
+                  Message
+                </Button>
+              </div>
             </div>
           </div>
 
